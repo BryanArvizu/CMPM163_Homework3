@@ -6,7 +6,7 @@ public class TreeBend : MonoBehaviour {
 
     public AudioPeer ap;
     public int partition = 0;
-    public float strength = 1;
+    public static float strength = 1;
 
 	Renderer rend;
 	void Start () {
@@ -26,12 +26,15 @@ public class TreeBend : MonoBehaviour {
             float mag = ap.aveMag[partition];
 
             // Set mag to _Bend in the TreeShader
-            print("Mag: " + mag);
-            rend.material.SetFloat("_Bend", mag);
+            rend.material.SetFloat("_Bend", mag + (mag-1) * strength);
         }
 
 	}
 
-
+    public void SetStrength(float str)
+    {
+        if (str >= 0)
+            strength = str;
+    }
 }
 

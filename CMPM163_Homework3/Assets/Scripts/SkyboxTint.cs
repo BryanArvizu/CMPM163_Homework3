@@ -6,7 +6,7 @@ public class SkyboxTint : MonoBehaviour
 {
     public AudioPeer ap;
     public int partition = 0;
-    public float strength = 1;
+    public static float strength = 5;
 
     public Material mat;
 
@@ -17,7 +17,7 @@ public class SkyboxTint : MonoBehaviour
     void LateUpdate()
     {
         Color color = Color.black;
-        float mag = (ap.aveMag[partition] - 1f) * 10f;
+        float mag = (ap.aveMag[partition] - 1f) * strength;
 
         for(int i=0; i<4; i++)
         {
@@ -25,5 +25,11 @@ public class SkyboxTint : MonoBehaviour
         }
 
         mat.SetColor("_Tint", color);
+    }
+
+    public void SetStrength(float str)
+    {
+        if (str >= 0)
+            strength = str;
     }
 }
